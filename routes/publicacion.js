@@ -4,10 +4,9 @@ module.exports = app => {
   
     var router = require("express").Router();
   
-    // crear 
+    //crear 
     router.post("/", publicacion.create);
   
-
     // actualizar 
     router.put("/:id", publicacion.update);
   
