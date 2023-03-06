@@ -13,7 +13,7 @@ exports.create = (req, res) => {
       return;
     }
   
-    // Create a Tutorial
+    // Crear
     const publicacion = {
       titulo: req.body.titulo,
       descripcion: req.body.descripcion,
