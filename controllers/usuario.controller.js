@@ -5,7 +5,6 @@ var bcrypt = require('bcrypt-nodejs');
 var jwt = require('../helpers/jwt');
 
 
-
 //registro de usuario
 const registro_usuario = async function(req,res){
     var data = req.body;

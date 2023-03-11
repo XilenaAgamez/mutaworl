@@ -15,4 +15,5 @@ module.exports = app => {
   
   
     app.use('/api/publicacion', router);
+
   };

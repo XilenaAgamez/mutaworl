@@ -1,40 +1,37 @@
 const db = require("../models");
+//const publicacion = require("../models/publicacion");
 const Publicacion = db.publicacion;
 const Op = db.Sequelize.Op;
 
 
 exports.create = (req, res) => {
 
-    if (!req.body.titulo) {
+  if (!req.body.titulo) {
+    res.status(400).send({
+      message: "No puede estar Vacio!"
+    });
+    return;
+  }
 
-      res.status(400).send({
-        message: "No se puede dejar vacio!"
+  // Create a Tutorial
+  const publicaciones = {
+    titulo: req.body.titulo,
+    descripcion: req.body.descripcion,
+    autor: req.body.autor    
+  };
+
+  // Save Tutorial in the database
+  Publicacion.create(publicaciones)
+    .then(data => {
+      res.send(data);
+    })
+    .catch(err => {
+      res.status(500).send({
+        message:
+          err.message || "Error."
       });
-      return;
-    }
-  
-    // Crear
-    const publicacion = {
-      titulo: req.body.titulo,
-      descripcion: req.body.descripcion,
-      autor: req.body.autor
-    };
-
-
-   
-   Publicacion.create(publicacion)
-   .then(data => {
-     res.send(data);
-   })
-   .catch(err => {
-     res.status(500).send({
-       message:
-         err.message || "Ocurrio un error con el guardado."
-     });
-   });
+    });
 };
-
-
 
 
 

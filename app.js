@@ -1,57 +1,34 @@
 const express = require("express");
-const app = express();
 const bodyParser = require("body-parser");
 const cors = require("cors");
-const { prototype } = require('jsonwebtoken/lib/JsonWebTokenError');
+
+const app = express();
 
 
-//rutas
-require("./routes/publicacion")(app);
-require("./routes/usuario")(app);
+var corsOptions = {
+  origin: "http://localhost:8081"
+};
+
+app.use(cors(corsOptions));
+
+app.use(express.json());
 
 
-
-const db = require("./models");
-db.sequelize.sync()
-  .then(() => {
-    console.log("bd conectada.");
-  })
-  .catch((err) => {
-    console.log("fallo la conexion: " + err.message);
-  })
+app.use(express.urlencoded({ extended: true }));
 
 
-  db.sequelize.sync({ force: true }).then(() => {
-    console.log("detener y volver a sincronizar.");
-  });
-
-
-// simple route
 app.get("/", (req, res) => {
   res.json({ message: "Servidor corriendo." });
 });
 
-// set port, listen for requests
+
+require("./routes/publicacion")(app);
+require("./routes/usuario")(app);
+
+
+// Puerto
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {
-  console.log(`Servidor corriendo en el puerto ${PORT}.`);
+  console.log('El servidor se encuentra corriendo en el puerto' + PORT);
 });
-
-
-app.use(bodyParser.urlencoded({extended:true}));
-app.use(bodyParser.json({limit: '50mb',extended: true}))
-
-
-
-app.use((req,res,next)=>{
-  res.header('Access-Control-Allow-Origin','*'); 
-  res.header('Access-Control-Allow-Headers','Authorization, X-API-KEY, Origin, X-Requested-With, Content-Type, Access-Control-Allow-Request-Method');
-  res.header('Access-Control-Allow-Methods','GET, PUT, POST, DELETE, OPTIONS');
-  res.header('Allow','GET, PUT, POST, DELETE, OPTIONS');
-  next();
-
-});
-
-
-
 
