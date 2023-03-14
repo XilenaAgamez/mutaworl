@@ -1,4 +1,3 @@
-'use strict'
 
 var jwt = require('jwt-simple');
 var moment = require('moment');
@@ -8,7 +7,7 @@ var secret = 'xileagam';
 exports.createToken = function(user){
     var payload = {
         sub: user._id,
-        nombres: user.nombres,
+        nombre: user.nombre,
         email: user.email,
         iat: moment().unix(),
         exp: moment().add(7, 'days').unix()

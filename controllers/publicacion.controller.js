@@ -4,6 +4,8 @@ const Publicacion = db.publicacion;
 const Op = db.Sequelize.Op;
 
 
+
+
 exports.create = (req, res) => {
 
   if (!req.body.titulo) {
@@ -17,10 +19,10 @@ exports.create = (req, res) => {
   const publicaciones = {
     titulo: req.body.titulo,
     descripcion: req.body.descripcion,
-    autor: req.body.autor    
+    id_user: req.body.id_user    
   };
 
-  // Save Tutorial in the database
+  //Guardar
   Publicacion.create(publicaciones)
     .then(data => {
       res.send(data);
@@ -35,8 +37,7 @@ exports.create = (req, res) => {
 
 
 
-//update
-
+//Actualizar
 exports.update = (req, res) => {
     const id = req.params.id;
   
@@ -46,17 +47,17 @@ exports.update = (req, res) => {
       .then(num => {
         if (num == 1) {
           res.send({
-            message: "se actualizo con exito."
+            message: "Se actualizo con exito."
           });
         } else {
           res.send({
-            message: `No se puede actualizar el reg con id=${id}.No fue encontrado!`
+            message: `No se puede actualizar el registro con id=${id}. No fue encontrado!`
           });
         }
       })
       .catch(err => {
         res.status(500).send({
-          message: "Error updating  with id=" + id
+          message: "Error No se pudo actualizar"
         });
       });
   };
@@ -72,7 +73,7 @@ exports.update = (req, res) => {
       .then(num => {
         if (num == 1) {
           res.send({
-            message: " Elimanado con exito!"
+            message: "Elimanado con exito!"
           });
         } else {
           res.send({

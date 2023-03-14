@@ -23,4 +23,5 @@ db.sequelize = sequelize;
 db.publicacion = require("./publicacion.js")(sequelize, Sequelize);
 db.usuario = require("./usuario.js")(sequelize, Sequelize);
 
+
 module.exports = db;

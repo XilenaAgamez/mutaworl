@@ -6,10 +6,10 @@ module.exports = (sequelize, Sequelize) => {
       descripcion: {
         type: Sequelize.STRING
       },
-      autor: {
-        type: Sequelize.STRING
-      }
+      id_user: {
+        type: Sequelize.INTEGER
+      },
     });
   
     return Publicacion;
-  };
+};
