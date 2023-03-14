@@ -1,7 +1,7 @@
 const express = require("express");
 const app = express();
 const bodyParser = require("body-parser");
-
+const { prototype } = require('jsonwebtoken/lib/JsonWebTokenError');
 const cors = require("cors");
 const db = require("./models");
 
